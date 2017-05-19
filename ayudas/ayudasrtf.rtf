@@ -1,0 +1,78 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf820
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 http://www.getlaura.com/how-to-enable-sessions-with-sinatra/\
+\
+\
+$ shotgun config.ru\
+\
+http://localhost:9393/\
+\
+_____________________\
+para hacer funcionar el BCrypt\
+\
+1.En models/ user.rb agregu\'e9: include BCrypt\
+\
+\
+\
+y este c\'f3digo:\
+def password\
+    @password ||= Password.new(password_digest)\
+  end\
+\
+ def password=(user_password)\
+   @password = Password.create(user_password)\
+   self.password_digest = @password\
+ end\
+\
+  #m\'e9todo de autenticaci\'f3n\
+  def self.authenticate(email, user_password)\
+    user = User.find_by(email: email)\
+    if user && (user.password == user_password)\
+      return user\
+    else\
+      nil\
+    end\
+  end\
+\
+\
+tambi\'e9n podr\'eda revisar esta documentacion: \
+https://github.com/codahale/bcrypt-ruby/blob/master/README.md\
+\
+2. require 'bcrypt'\
+3.en Gemfile: gem 'bcrypt'\
+4. instalar desde consola el "gem install bcrypt" \
+5. y podr\'eda actualizarlo con :\
+http://stackoverflow.com/questions/18968330/why-wont-the-bcrypt-ruby-gem-install-properly\
+\
+Actually a simple:\
+\
+gem install bundler\
+gem install bcrypt-ruby\
+and then:\
+\
+bundle update bcrypt-ruby\
+or bundle update bcrypt\
+\
+\
+\
+____________\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 Para crear archivos en carpeta model\
+$ rake generate:model NAME=User\
+$ rake generate:model NAME=Game\
+\
+Para crear archivos de db/migrate\
+$ rake generate:migration NAME=create_users\
+$ rake generate:migration NAME=create_games\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+\
+}

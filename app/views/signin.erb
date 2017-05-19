@@ -1,0 +1,16 @@
+<h1>Sign In</h1>
+
+<% if @errors %>
+  <p><%= @errors %></p>
+<% end %>
+<div class="container" id="form">
+   <!-- ¿Qué va en esta parte para realizar el sign in? -->
+    <form action="/signin" method="post">
+      <p class="versal">Email:</p>
+      <input type="email" name="email" placeholder="Email"><br><br>
+      <p class="versal">Password:</p>
+      <input type="password" name="password" placeholder="Password"><br><br>
+      <input type="submit" id="submit" value="Login">
+    </form>
+  
+</div> <!--end "container" div -->
